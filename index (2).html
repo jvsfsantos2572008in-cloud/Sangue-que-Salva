@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sangue que Salva — Doe sangue. Doe vida.</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700;9..144,900&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#FBF8F3;
+    --ink:#221812;
+    --ink-soft:#5a4a42;
+    --blood:#A61E27;
+    --blood-deep:#5C1015;
+    --blood-dark:#3D0B0F;
+    --gold:#C79A3E;
+    --line:#e4dcd0;
+    --card:#ffffff;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Inter',sans-serif;
+    line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3,.display{
+    font-family:'Fraunces',serif;
+    font-weight:700;
+    line-height:1.05;
+    letter-spacing:-0.01em;
+    margin:0;
+  }
+  .mono{
+    font-family:'IBM Plex Mono',monospace;
+  }
+  a{color:inherit;text-decoration:none;}
+  img{max-width:100%;display:block;}
+  .wrap{max-width:1120px;margin:0 auto;padding:0 24px;}
+  :focus-visible{outline:3px solid var(--gold);outline-offset:3px;}
+
+  /* ---- Header ---- */
+  header{
+    position:sticky;top:0;z-index:50;
+    background:var(--blood-deep);
+    border-bottom:1px solid rgba(255,255,255,.08);
+  }
+  .nav-row{
+    display:flex;align-items:center;justify-content:space-between;
+    height:68px;
+  }
+  .logo{
+    display:flex;align-items:center;gap:10px;
+    color:#fff;font-family:'Fraunces',serif;font-weight:700;font-size:1.15rem;
+  }
+  .logo-mark{
+    width:30px;height:30px;flex:0 0 auto;
+  }
+  .btn{
+    display:inline-block;background:var(--gold);color:var(--blood-dark);
+    font-weight:700;font-size:.9rem;padding:10px 20px;border-radius:3px;
+    border:none;cursor:pointer;transition:transform .15s, background .2s;
+  }
+  .btn:hover{background:#dcae4c;transform:translateY(-1px);}
+
+  /* ---- Heartbeat divider (signature element) ---- */
+  .pulse-divider{
+    width:100%;height:46px;display:block;overflow:hidden;
+  }
+  .pulse-divider path{
+    fill:none;stroke:var(--blood);stroke-width:2;stroke-linecap:round;stroke-linejoin:round;
+    stroke-dasharray:1400;stroke-dashoffset:1400;
+    animation:draw 4.5s ease-in-out infinite;
+  }
+  @keyframes draw{
+    0%{stroke-dashoffset:1400;}
+    55%{stroke-dashoffset:0;}
+    100%{stroke-dashoffset:-1400;}
+  }
+  @media(prefers-reduced-motion:reduce){
+    .pulse-divider path{animation:none;stroke-dashoffset:0;}
+    html{scroll-behavior:auto;}
+  }
+
+  /* ---- Hero ---- */
+  .hero{
+    background:
+      radial-gradient(ellipse at 80% -10%, rgba(166,30,39,.18), transparent 55%),
+      var(--paper);
+    padding:88px 0 56px;
+  }
+  .hero-grid{
+    display:grid;gap:40px;
+    grid-template-columns:1fr;
+  }
+  @media(min-width:900px){
+    .hero-grid{grid-template-columns:1.15fr .85fr;align-items:center;}
+  }
+  .eyebrow{
+    font-family:'IBM Plex Mono',monospace;font-size:.78rem;letter-spacing:.12em;
+    text-transform:uppercase;color:var(--blood);font-weight:600;
+    display:flex;align-items:center;gap:10px;margin-bottom:18px;
+  }
+  .eyebrow .dot{width:8px;height:8px;border-radius:50%;background:var(--blood);
+    animation:beat 1.2s ease-in-out infinite;}
+  @keyframes beat{0%,100%{transform:scale(1);opacity:1;}50%{transform:scale(1.5);opacity:.5;}}
+  @media(prefers-reduced-motion:reduce){.eyebrow .dot{animation:none;}}
+  .hero h1{font-size:clamp(2.3rem,5vw,3.6rem);color:var(--ink);}
+  .hero h1 em{font-style:normal;color:var(--blood);}
+  .hero p.lead{
+    margin-top:20px;font-size:1.12rem;color:var(--ink-soft);max-width:46ch;
+  }
+  .hero-actions{margin-top:30px;display:flex;gap:14px;flex-wrap:wrap;}
+  .btn-outline{
+    display:inline-block;padding:10px 20px;border-radius:3px;
+    border:1.5px solid var(--ink);font-weight:600;font-size:.9rem;
+  }
+  .hero-stat-card{
+    background:var(--blood-deep);color:#fff;border-radius:6px;
+    padding:34px 30px;position:relative;overflow:hidden;
+  }
+  .hero-stat-card::before{
+    content:"";position:absolute;inset:0;
+    background:radial-gradient(circle at 100% 0%, rgba(199,154,62,.25), transparent 60%);
+  }
+  .hero-stat-big{font-family:'IBM Plex Mono',monospace;font-size:3.4rem;font-weight:600;
+    color:var(--gold);position:relative;}
+  .hero-stat-card p{position:relative;color:#f2d9dc;margin:6px 0 0;font-size:.98rem;}
+  .hero-stat-sub{
+    margin-top:22px;padding-top:20px;border-top:1px solid rgba(255,255,255,.15);
+    display:grid;grid-template-columns:1fr 1fr;gap:14px;position:relative;
+  }
+  .hero-stat-sub div span{display:block;font-family:'IBM Plex Mono',monospace;font-size:1.3rem;color:#fff;font-weight:600;}
+  .hero-stat-sub div small{color:#e3b9bc;font-size:.76rem;}
+
+  /* ---- Section shell ---- */
+  section{padding:64px 0;}
+  .section-head{max-width:640px;margin-bottom:44px;}
+  .section-head .eyebrow{color:var(--blood);}
+  .section-head h2{font-size:clamp(1.7rem,3.4vw,2.5rem);}
+  .section-head p{color:var(--ink-soft);margin-top:12px;font-size:1.02rem;}
+
+  .band-dark{background:var(--blood-dark);color:#f4e9ea;}
+  .band-dark .section-head p{color:#d8b7ba;}
+  .band-dark .eyebrow{color:var(--gold);}
+
+  /* ---- Sobre ---- */
+  .sobre-cols{display:grid;gap:36px;grid-template-columns:1fr;}
+  @media(min-width:900px){.sobre-cols{grid-template-columns:1fr 1fr;}}
+  .sobre-cols p{color:var(--ink-soft);margin:0 0 16px;}
+  .sobre-cols h3{font-size:1.15rem;margin-bottom:10px;}
+
+  .stat-grid{
+    display:grid;gap:1px;background:var(--line);
+    grid-template-columns:repeat(2,1fr);
+    border:1px solid var(--line);border-radius:6px;overflow:hidden;margin-top:48px;
+  }
+  @media(min-width:760px){.stat-grid{grid-template-columns:repeat(4,1fr);}}
+  .stat-grid div{background:var(--card);padding:26px 20px;}
+  .stat-grid .num{font-family:'IBM Plex Mono',monospace;font-size:2rem;font-weight:600;color:var(--blood);}
+  .stat-grid .label{font-size:.85rem;color:var(--ink-soft);margin-top:6px;}
+  .stat-grid .note{font-size:.76rem;color:#9a8b83;margin-top:8px;}
+
+  /* ---- Valores ---- */
+  .valores-grid{display:grid;gap:22px;grid-template-columns:1fr;}
+  @media(min-width:700px){.valores-grid{grid-template-columns:1fr 1fr;}}
+  .valor-card{
+    border-left:3px solid var(--gold);padding:4px 0 4px 20px;
+  }
+  .valor-card h3{font-size:1.05rem;margin-bottom:6px;color:#fff;}
+  .valor-card p{color:#d8b7ba;font-size:.94rem;margin:0;}
+
+  /* ---- Benefícios ---- */
+  .benef-grid{display:grid;gap:20px;grid-template-columns:1fr;}
+  @media(min-width:700px){.benef-grid{grid-template-columns:1fr 1fr;}}
+  @media(min-width:1020px){.benef-grid{grid-template-columns:1fr 1fr 1fr;}}
+  .benef-card{
+    background:var(--card);border:1px solid var(--line);border-radius:6px;
+    padding:24px;
+  }
+  .benef-card .idx{
+    font-family:'IBM Plex Mono',monospace;font-size:.78rem;color:var(--blood);
+    letter-spacing:.05em;
+  }
+  .benef-card h3{font-size:1.05rem;margin:10px 0 8px;}
+  .benef-card p{color:var(--ink-soft);font-size:.92rem;margin:0;}
+
+  /* ---- Como doar ---- */
+  .elig-grid{display:grid;gap:24px;grid-template-columns:1fr;}
+  @media(min-width:800px){.elig-grid{grid-template-columns:1fr 1fr;}}
+  .elig-card{background:var(--card);border:1px solid var(--line);border-radius:6px;padding:26px 28px;}
+  .elig-card h3{font-size:1.05rem;margin-bottom:16px;display:flex;align-items:center;gap:10px;}
+  .elig-card.pode h3{color:#2f6b3f;}
+  .elig-card.nao h3{color:var(--blood);}
+  .elig-card ul{margin:0;padding:0;list-style:none;}
+  .elig-card li{
+    padding:9px 0;border-top:1px solid var(--line);font-size:.94rem;color:var(--ink-soft);
+    display:flex;gap:10px;
+  }
+  .elig-card li:first-child{border-top:none;}
+  .elig-card li::before{content:"";flex:0 0 auto;width:6px;height:6px;border-radius:50%;margin-top:8px;}
+  .elig-card.pode li::before{background:#2f6b3f;}
+  .elig-card.nao li::before{background:var(--blood);}
+
+  .faq{margin-top:48px;max-width:760px;}
+  .faq-item{border-bottom:1px solid var(--line);}
+  .faq-item summary{
+    cursor:pointer;padding:18px 4px;font-weight:600;font-size:.98rem;
+    list-style:none;display:flex;justify-content:space-between;align-items:center;gap:16px;
+  }
+  .faq-item summary::-webkit-details-marker{display:none;}
+  .faq-item summary::after{content:"+";font-family:'IBM Plex Mono',monospace;font-size:1.3rem;color:var(--blood);flex:0 0 auto;}
+  .faq-item[open] summary::after{content:"–";}
+  .faq-item p{margin:0 4px 18px;color:var(--ink-soft);font-size:.94rem;max-width:64ch;}
+
+  /* ---- Onde doar ---- */
+  .cidade-label{
+    font-family:'IBM Plex Mono',monospace;font-size:.82rem;letter-spacing:.08em;
+    text-transform:uppercase;color:var(--blood);font-weight:600;
+    margin:36px 0 16px;padding-top:8px;
+  }
+  .cidade-label:first-of-type{margin-top:0;}
+  .local-grid{display:grid;gap:18px;grid-template-columns:1fr;}
+  @media(min-width:760px){.local-grid{grid-template-columns:1fr 1fr;}}
+  .local-card{
+    background:var(--card);border:1px solid var(--line);border-radius:6px;
+    padding:22px 24px;display:flex;flex-direction:column;gap:8px;
+  }
+  .local-card h3{font-size:1.02rem;}
+  .local-card .addr{font-size:.9rem;color:var(--ink-soft);}
+  .local-card .meta{
+    display:flex;flex-wrap:wrap;gap:6px 16px;font-size:.84rem;color:var(--ink-soft);
+    margin-top:4px;font-family:'IBM Plex Mono',monospace;
+  }
+  .local-card .note{font-size:.84rem;color:#9a8b83;font-style:italic;}
+  .local-card .maplink{
+    margin-top:10px;font-size:.85rem;font-weight:600;color:var(--blood);
+    border-bottom:1px solid var(--blood);align-self:flex-start;
+  }
+
+  /* ---- CTA final ---- */
+  .cta-final{
+    background:var(--blood);color:#fff;text-align:center;padding:70px 24px;
+    border-radius:8px;margin:0 24px;
+  }
+  .cta-final h2{color:#fff;font-size:clamp(1.6rem,3.6vw,2.3rem);}
+  .cta-final p{color:#f6dfe0;max-width:52ch;margin:14px auto 26px;}
+  .cta-final .btn{background:#fff;color:var(--blood);}
+  .cta-final .btn:hover{background:#fbeeee;}
+
+  /* ---- Footer ---- */
+  footer{background:var(--blood-dark);color:#c9a3a5;padding:48px 0 28px;margin-top:40px;}
+  .foot-grid{display:grid;gap:32px;grid-template-columns:1fr;}
+  @media(min-width:760px){.foot-grid{grid-template-columns:1.3fr 1fr 1fr;}}
+  .foot-logo{color:#fff;font-family:'Fraunces',serif;font-weight:700;font-size:1.15rem;margin-bottom:10px;}
+  .foot-grid h4{color:#f2d9dc;font-size:.85rem;text-transform:uppercase;letter-spacing:.08em;margin-bottom:14px;}
+  .foot-grid ul{list-style:none;margin:0;padding:0;}
+  .foot-grid li{margin-bottom:10px;font-size:.92rem;}
+  .foot-grid a:hover{color:#fff;}
+  .foot-bottom{
+    border-top:1px solid rgba(255,255,255,.1);margin-top:36px;padding-top:20px;
+    font-size:.8rem;display:flex;flex-wrap:wrap;gap:8px 20px;justify-content:space-between;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav-row">
+    <a class="logo" href="#topo">
+      <svg class="logo-mark" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="12" cy="12" r="11" fill="#fff"/>
+        <path d="M12 5.5c2.5 3 5.5 6 5.5 9a5.5 5.5 0 0 1-11 0c0-3 3-6 5.5-9Z" fill="#A61E27"/>
+      </svg>
+      Sangue que Salva
+    </a>
+    <a class="btn" href="#onde-doar">Quero Doar</a>
+  </div>
+</header>
+
+<main id="topo">
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <div class="eyebrow"><span class="dot"></span> Atibaia &amp; Bragança Paulista</div>
+        <h1>Uma bolsa de sangue.<br><em>Quatro vidas salvas.</em></h1>
+        <p class="lead">Informação clara sobre como, onde e por que doar sangue na nossa região — para que ninguém deixe de doar por falta de dados.</p>
+        <div class="hero-actions">
+          <a class="btn" href="#onde-doar">Encontrar um posto</a>
+          <a class="btn-outline" href="#como-doar">Ver requisitos</a>
+        </div>
+      </div>
+      <div class="hero-stat-card">
+        <div class="hero-stat-big">1,8%</div>
+        <p>da população brasileira doa sangue regularmente. A OMS recomenda no mínimo 3%.</p>
+        <div class="hero-stat-sub">
+          <div><span>5.500</span><small>bolsas necessárias por dia em SP</small></div>
+          <div><span>35 dias</span><small>validade máxima do sangue total</small></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <svg class="pulse-divider" viewBox="0 0 1200 46" preserveAspectRatio="none" aria-hidden="true">
+    <path d="M0 23 L260 23 L290 23 L305 6 L320 40 L335 12 L350 30 L365 23 L400 23 L1200 23"/>
+  </svg>
+
+  <!-- SOBRE -->
+  <section id="sobre">
+    <div class="wrap">
+      <div class="section-head">
+        <div class="eyebrow">Quem somos</div>
+        <h2>Sobre o Sangue que Salva</h2>
+        <p>Um projeto de conscientização sobre a importância da doação de sangue para as comunidades de Atibaia e Bragança Paulista.</p>
+      </div>
+      <div class="sobre-cols">
+        <div>
+          <h3>Nossa missão</h3>
+          <p>Nascemos da necessidade de aproximar doadores dos postos de coleta da região. Apesar da importância vital do sangue para o sistema de saúde, os bancos de sangue brasileiros operam frequentemente abaixo da capacidade ideal — e a falta de informação é uma das principais barreiras.</p>
+          <p>Nossa missão é simples: informar, desmistificar e inspirar. Queremos que cada visitante saia sabendo que pode fazer a diferença — e sabendo exatamente como.</p>
+        </div>
+        <div>
+          <h3>Por que isso importa para a nossa região</h3>
+          <p>Atibaia e Bragança Paulista são cidades de médio porte com hospitais que atendem não só moradores locais, mas também pacientes de municípios vizinhos. Cirurgias, partos de risco, acidentes e tratamentos oncológicos dependem de estoque constante de sangue.</p>
+          <p>A sazonalidade é um problema real: em julho e janeiro — férias escolares — as doações caem, enquanto a demanda se mantém. Campanhas locais fazem diferença concreta nesses períodos.</p>
+        </div>
+      </div>
+
+      <div class="stat-grid">
+        <div><div class="num">1,8%</div><div class="label">da população doa regularmente</div><div class="note">OMS recomenda ao menos 3%</div></div>
+        <div><div class="num">5.500</div><div class="label">bolsas necessárias por dia</div><div class="note">Apenas no estado de SP</div></div>
+        <div><div class="num">35 dias</div><div class="label">validade do sangue total</div><div class="note">Estoques renovados sempre</div></div>
+        <div><div class="num">4 vidas</div><div class="label">salvas por doação</div><div class="note">Hemácias, plaquetas e plasma</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- VALORES -->
+  <section class="band-dark">
+    <div class="wrap">
+      <div class="section-head">
+        <div class="eyebrow">O que nos guia</div>
+        <h2>Nossos valores</h2>
+      </div>
+      <div class="valores-grid">
+        <div class="valor-card">
+          <h3>Solidariedade</h3>
+          <p>Ajudar o próximo é um valor humano fundamental — doar sangue é uma das formas mais diretas de exercê-lo.</p>
+        </div>
+        <div class="valor-card">
+          <h3>Informação acessível</h3>
+          <p>Muitas pessoas não doam por falta de informação ou por mitos. Nosso compromisso é oferecer conteúdo claro e baseado em evidências.</p>
+        </div>
+        <div class="valor-card">
+          <h3>Comunidade local</h3>
+          <p>Focamos em Atibaia e Bragança Paulista porque mudanças reais começam perto de casa, com ações concretas.</p>
+        </div>
+        <div class="valor-card">
+          <h3>Impacto contínuo</h3>
+          <p>Uma doação salva vidas hoje. Um doador regular salva vidas por anos — queremos cultivar essa cultura na região.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <svg class="pulse-divider" viewBox="0 0 1200 46" preserveAspectRatio="none" aria-hidden="true">
+    <path d="M0 23 L260 23 L290 23 L305 6 L320 40 L335 12 L350 30 L365 23 L400 23 L1200 23"/>
+  </svg>
+
+  <!-- BENEFÍCIOS -->
+  <section id="beneficios">
+    <div class="wrap">
+      <div class="section-head">
+        <div class="eyebrow">Por que doar</div>
+        <h2>Benefícios de doar sangue</h2>
+        <p>Você salva até 4 vidas por doação — e ainda cuida da própria saúde. A ciência confirma vantagens concretas para quem doa regularmente.</p>
+      </div>
+      <div class="benef-grid">
+        <div class="benef-card">
+          <div class="idx">01</div>
+          <h3>Check-up gratuito</h3>
+          <p>Antes de cada doação você passa por triagem clínica completa: pressão, temperatura, frequência cardíaca, peso e hemoglobina — sem custo.</p>
+        </div>
+        <div class="benef-card">
+          <div class="idx">02</div>
+          <h3>Saúde cardiovascular</h3>
+          <p>Doadores regulares têm menor risco de doenças cardíacas: a redução do ferro no sangue diminui a oxidação do colesterol LDL, protegendo as artérias.</p>
+        </div>
+        <div class="benef-card">
+          <div class="idx">03</div>
+          <h3>Renovação celular</h3>
+          <p>Após a doação, seu organismo é estimulado a produzir novas células sanguíneas na medula óssea, mantendo o sistema hematopoiético ativo.</p>
+        </div>
+        <div class="benef-card">
+          <div class="idx">04</div>
+          <h3>Detecção precoce</h3>
+          <p>Seu sangue é testado para HIV, hepatite B e C, sífilis, doença de Chagas e outras condições, com notificação sigilosa em caso positivo.</p>
+        </div>
+        <div class="benef-card">
+          <div class="idx">05</div>
+          <h3>Controle do ferro</h3>
+          <p>O excesso de ferro está associado a doenças como hemocromatose e danos ao fígado. A doação regular ajuda a manter os níveis em equilíbrio.</p>
+        </div>
+        <div class="benef-card">
+          <div class="idx">06</div>
+          <h3>Queima de calorias</h3>
+          <p>Repor o sangue doado consome energia — estima-se um gasto de cerca de 650 calorias no processo de regeneração.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <svg class="pulse-divider" viewBox="0 0 1200 46" preserveAspectRatio="none" aria-hidden="true">
+    <path d="M0 23 L260 23 L290 23 L305 6 L320 40 L335 12 L350 30 L365 23 L400 23 L1200 23"/>
+  </svg>
+
+  <!-- COMO DOAR -->
+  <section id="como-doar">
+    <div class="wrap">
+      <div class="section-head">
+        <div class="eyebrow">Guia do doador</div>
+        <h2>Como doar sangue</h2>
+        <p>Tudo o que você precisa saber para fazer sua primeira doação com segurança e tranquilidade.</p>
+      </div>
+
+      <div class="elig-grid">
+        <div class="elig-card pode">
+          <h3>Pode doar</h3>
+          <ul>
+            <li>Ter entre 16 e 69 anos (menores de 18 com autorização dos responsáveis)</li>
+            <li>Pesar mais de 50 kg</li>
+            <li>Estar em bom estado de saúde geral</li>
+            <li>Ter dormido pelo menos 6 horas nas últimas 24 horas</li>
+            <li>Não estar em jejum — evitar alimentos gordurosos nas 3 horas anteriores</li>
+            <li>Apresentar documento de identidade com foto</li>
+          </ul>
+        </div>
+        <div class="elig-card nao">
+          <h3>Impedimentos temporários</h3>
+          <ul>
+            <li>Gripe, resfriado ou febre — aguardar 7 dias após a recuperação</li>
+            <li>Tatuagem ou piercing feitos há menos de 12 meses</li>
+            <li>Gravidez ou amamentação (até 12 meses após o parto)</li>
+            <li>Uso de antibióticos — aguardar 7 dias após o término</li>
+            <li>Ingestão de bebida alcoólica nas últimas 12 horas</li>
+            <li>Pressão arterial fora dos limites aceitáveis no dia da doação</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="faq">
+        <details class="faq-item">
+          <summary>Dói fazer a doação de sangue?</summary>
+          <p>A picada da agulha causa um desconforto rápido, semelhante ao de um exame de sangue comum. A coleta em si não dói.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Vou ficar fraco depois de doar?</summary>
+          <p>É normal sentir um leve cansaço logo após a doação. Por isso recomenda-se descansar alguns minutos, se hidratar e fazer um lanche no local antes de ir embora.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Posso trabalhar depois de doar?</summary>
+          <p>Sim, na maioria dos casos. A recomendação é evitar esforço físico intenso e exposição ao sol nas primeiras horas após a doação.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Preciso estar em jejum?</summary>
+          <p>Não. Na verdade, o ideal é ter se alimentado normalmente, evitando apenas alimentos gordurosos nas 3 horas antes da doação.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Posso contrair alguma doença doando sangue?</summary>
+          <p>Não. Todo o material usado na coleta é descartável e esterilizado, utilizado uma única vez por doador.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Meu sangue vai ser testado?</summary>
+          <p>Sim. Toda doação passa por testes para HIV, hepatite B e C, sífilis, doença de Chagas e outras condições, com resultado comunicado de forma sigilosa.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <svg class="pulse-divider" viewBox="0 0 1200 46" preserveAspectRatio="none" aria-hidden="true">
+    <path d="M0 23 L260 23 L290 23 L305 6 L320 40 L335 12 L350 30 L365 23 L400 23 L1200 23"/>
+  </svg>
+
+  <!-- ONDE DOAR -->
+  <section id="onde-doar">
+    <div class="wrap">
+      <div class="section-head">
+        <div class="eyebrow">Postos de coleta</div>
+        <h2>Onde doar sangue</h2>
+        <p>Escolha o posto mais próximo de você em Atibaia ou Bragança Paulista e salve vidas.</p>
+      </div>
+
+      <div class="cidade-label">Atibaia</div>
+      <div class="local-grid">
+        <div class="local-card">
+          <h3>Hemocentro de Atibaia — Santa Casa</h3>
+          <div class="addr">Rua Coronel Teixeira Nogueira, 300 — Centro, Atibaia/SP</div>
+          <div class="meta"><span>Seg a sex: 7h–12h</span><span>(11) 4414-7200</span></div>
+          <div class="note">Agendamento recomendado. Entrada pelo pronto-socorro.</div>
+          <a class="maplink" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Rua+Coronel+Teixeira+Nogueira+300+Centro+Atibaia+SP">Ver no mapa →</a>
+        </div>
+        <div class="local-card">
+          <h3>UBS Centro — Ponto de Coleta</h3>
+          <div class="addr">Rua Jerônimo de Camargo, 150 — Centro, Atibaia/SP</div>
+          <div class="meta"><span>Ter e qui: 8h–11h</span><span>(11) 4414-5500</span></div>
+          <div class="note">Coleta em dias específicos. Confirme por telefone.</div>
+          <a class="maplink" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Rua+Jer%C3%B4nimo+de+Camargo+150+Centro+Atibaia+SP">Ver no mapa →</a>
+        </div>
+      </div>
+
+      <div class="cidade-label">Bragança Paulista</div>
+      <div class="local-grid">
+        <div class="local-card">
+          <h3>Hemocentro Regional — Hospital Bragança</h3>
+          <div class="addr">Av. Francisco Rodrigues Filho, 1500 — Mogilar, Bragança Paulista/SP</div>
+          <div class="meta"><span>Seg a sex: 7h–13h</span><span>(11) 4035-9200</span></div>
+          <div class="note">Maior capacidade da região. Sem necessidade de agendamento.</div>
+          <a class="maplink" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Av+Francisco+Rodrigues+Filho+1500+Mogilar+Bragan%C3%A7a+Paulista+SP">Ver no mapa →</a>
+        </div>
+        <div class="local-card">
+          <h3>Santa Casa de Bragança Paulista</h3>
+          <div class="addr">Rua Cel. Souza Franco, 240 — Centro, Bragança Paulista/SP</div>
+          <div class="meta"><span>Seg a sáb: 7h–11h30</span><span>(11) 4032-1000</span></div>
+          <div class="note">Aceita doadores espontâneos e agendados. Estacionamento gratuito.</div>
+          <a class="maplink" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Rua+Cel+Souza+Franco+240+Centro+Bragan%C3%A7a+Paulista+SP">Ver no mapa →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA FINAL -->
+  <div class="wrap" style="padding-bottom:64px;">
+    <div class="cta-final">
+      <h2>Faça parte dessa corrente</h2>
+      <p>Cada doador é um passo a mais para uma região mais saudável e solidária. Escolha um posto acima e agende sua doação.</p>
+      <a class="btn" href="#onde-doar">Quero doar agora</a>
+    </div>
+  </div>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <div class="foot-logo">Sangue que Salva</div>
+        <p style="font-size:.92rem;max-width:34ch;">Incentivando a doação de sangue na região de Atibaia e Bragança Paulista.<br><em>"Doe sangue. Doe vida."</em></p>
+      </div>
+      <div>
+        <h4>Navegação</h4>
+        <ul>
+          <li><a href="#como-doar">Como Doar</a></li>
+          <li><a href="#beneficios">Benefícios</a></li>
+          <li><a href="#onde-doar">Onde Doar</a></li>
+          <li><a href="#sobre">Sobre</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Sobre o projeto</h4>
+        <ul>
+          <li>Trabalho escolar de conscientização</li>
+          <li>Foco: Atibaia e Bragança Paulista — SP</li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 Sangue que Salva. Todos os direitos reservados.</span>
+      <span>Atibaia e Bragança Paulista — SP</span>
+    </div>
+  </div>
+</footer>
+
+
+
+</body>
+</html>
