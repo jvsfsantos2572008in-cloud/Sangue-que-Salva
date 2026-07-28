@@ -61,12 +61,36 @@
   .logo-mark{
     width:30px;height:30px;flex:0 0 auto;
   }
+  nav ul{
+    list-style:none;display:flex;gap:28px;margin:0;padding:0;
+  }
+  nav a{
+    color:#f2d9dc;font-size:.92rem;font-weight:500;
+    padding:6px 2px;border-bottom:2px solid transparent;
+    transition:color .2s, border-color .2s;
+  }
+  nav a:hover{color:#fff;border-color:var(--gold);}
   .btn{
     display:inline-block;background:var(--gold);color:var(--blood-dark);
     font-weight:700;font-size:.9rem;padding:10px 20px;border-radius:3px;
     border:none;cursor:pointer;transition:transform .15s, background .2s;
   }
   .btn:hover{background:#dcae4c;transform:translateY(-1px);}
+  .nav-cta{display:none;}
+  @media(min-width:820px){.nav-cta{display:inline-block;}}
+  .nav-links{display:none;}
+  @media(min-width:820px){.nav-links{display:flex;}}
+  .menu-btn{
+    display:inline-flex;background:none;border:1px solid rgba(255,255,255,.3);
+    color:#fff;padding:8px 12px;border-radius:3px;font-size:.85rem;cursor:pointer;
+  }
+  @media(min-width:820px){.menu-btn{display:none;}}
+  .mobile-nav{
+    display:none;flex-direction:column;gap:2px;background:var(--blood-dark);
+    padding:8px 24px 16px;
+  }
+  .mobile-nav.open{display:flex;}
+  .mobile-nav a{color:#f2d9dc;padding:10px 0;border-bottom:1px solid rgba(255,255,255,.08);font-size:.95rem;}
 
   /* ---- Heartbeat divider (signature element) ---- */
   .pulse-divider{
@@ -279,7 +303,23 @@
       </svg>
       Sangue que Salva
     </a>
-    <a class="btn" href="#onde-doar">Quero Doar</a>
+    <nav class="nav-links">
+      <ul>
+        <li><a href="#como-doar">Como Doar</a></li>
+        <li><a href="#beneficios">Benefícios</a></li>
+        <li><a href="#onde-doar">Onde Doar</a></li>
+        <li><a href="#sobre">Sobre</a></li>
+      </ul>
+    </nav>
+    <a class="btn nav-cta" href="#onde-doar">Quero Doar</a>
+    <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="mobileNav">Menu</button>
+  </div>
+  <div class="mobile-nav" id="mobileNav">
+    <a href="#como-doar">Como Doar</a>
+    <a href="#beneficios">Benefícios</a>
+    <a href="#onde-doar">Onde Doar</a>
+    <a href="#sobre">Sobre</a>
+    <a href="#onde-doar" style="color:var(--gold);font-weight:700;">Quero Doar →</a>
   </div>
 </header>
 
@@ -577,7 +617,20 @@
   </div>
 </footer>
 
-
+<script>
+  var menuBtn = document.getElementById('menuBtn');
+  var mobileNav = document.getElementById('mobileNav');
+  menuBtn.addEventListener('click', function(){
+    var isOpen = mobileNav.classList.toggle('open');
+    menuBtn.setAttribute('aria-expanded', isOpen);
+  });
+  mobileNav.querySelectorAll('a').forEach(function(a){
+    a.addEventListener('click', function(){
+      mobileNav.classList.remove('open');
+      menuBtn.setAttribute('aria-expanded','false');
+    });
+  });
+</script>
 
 </body>
 </html>
